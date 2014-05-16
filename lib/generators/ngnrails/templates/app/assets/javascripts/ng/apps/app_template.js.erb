@@ -1,0 +1,20 @@
+'use strict';
+
+var <%= @ng_app_name %> = angular.module('<%= @ng_app_name %>', [
+    <% @sitewide_modules.each do |module_name| %>
+    '<%= module_name %>',
+    <% end %>
+    'ngnrails.modules'
+]);
+
+<%= @ng_app_name %>.config(['$routeProvider', function ($routeProvider) {
+  $routeProvider
+    .when('/', {
+        title: " <%= human_name %>",
+        templateUrl: '<%= view_route %>',
+        controller: 'MainCtrl'
+    })
+    .otherwise({
+        redirectTo: '/'
+    });
+}]);

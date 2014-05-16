@@ -1,0 +1,18 @@
+'use strict';
+
+<%= @ng_app_name %>.factory('<%= @module_name %>', [
+    '$rootScope',
+    function($rootScope) {
+
+        // Logic
+        // ...
+
+        var meaningOfLife = 42;
+
+        // Public API here
+        return {
+            someMethod: function () {
+                return meaningOfLife;
+            }
+        };
+}]);

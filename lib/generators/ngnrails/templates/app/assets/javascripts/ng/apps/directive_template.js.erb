@@ -1,0 +1,23 @@
+'use strict';
+
+<%= @ng_app_name %>.directive('<%= @module_name %>', [
+    '$rootScope',
+    function($rootScope) {
+
+        return {
+            restrict: '<%= @restrict %>',
+            transclude: <%= @transclude %>,
+            replace: <%= @replace %>,
+            scope: {
+                // @ or @attr bind with string (expander-title="Click me now!" or expander-title="{{title}}")
+                // = or =attr  bind with parent scope property (expander-title='title')
+                // & or &attr pass in a function from the parent scope to be called later (expander-click="onClick")
+            },
+            <% if @template_url %>
+            templateUrl: '<%= @template_url %>',
+            <% end %>
+            link: function (scope, element, attr) {
+
+            }
+        };
+}]);

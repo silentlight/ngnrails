@@ -1,0 +1,16 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag '@@singular_name@@' %>
+<% end %>
+<% content_for :content do %>
+
+    <div ng-app="@@class_name@@">
+
+      <div class="content" ng-view=""></div>
+
+    </div>
+
+<% end %>
+<% content_for :footer do %>
+    <%= javascript_include_tag 'ng/apps/@@singular_name@@/includes' %>
+<% end %>
+<%= render template: "layouts/@@singular_name@@" %>

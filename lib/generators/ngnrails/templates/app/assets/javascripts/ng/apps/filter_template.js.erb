@@ -1,0 +1,7 @@
+'use strict';
+
+<%= @ng_app_name %>.service('<%= @module_name %>', function () {
+    return function (input) {
+        return '<%= @module_name %> filter: ' + input;
+    };
+});

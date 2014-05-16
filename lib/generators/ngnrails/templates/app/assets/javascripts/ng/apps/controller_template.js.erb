@@ -1,0 +1,14 @@
+'use strict';
+
+<%= @ng_app_name %>.controller('<%= @module_name %>', [
+    '$scope',
+    function($scope) {
+
+    $scope.init = function(){
+
+        $scope.players = ["Michael Jordan", "Vince Carter", "Kevin Duran", "Kevin Garnett"];
+
+    };
+
+    $scope.init();
+}]);
