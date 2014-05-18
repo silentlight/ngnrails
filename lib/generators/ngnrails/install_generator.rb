@@ -37,7 +37,7 @@ module Ngnrails
       create_file "app/assets/javascripts/includes.js"
 
       # Add asset to modules/shared includes (assets pipeline)
-      append_to_file 'app/assets/javascripts/ng/modules/includes.js', "//=require_tree .\n"
+      create_file 'app/assets/javascripts/ng/modules/includes.js', "//=require_tree .\n"
 
     end
 
