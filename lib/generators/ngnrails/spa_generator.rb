@@ -127,9 +127,9 @@ module Ngnrails
       empty_directory "app/assets/javascripts/ng/apps/#{singular_name.underscore.downcase}/services"
 
       if @view_type == VIEW_TYPE_DYNAMIC
-        @view_route = "/ng/apps/admin_app/views/main"
+        @view_route = "/ng/apps/#{singular_name.underscore.downcase}/views/main"
       else
-        @view_route = "ng/apps/admin_app/views/main.html"
+        @view_route = "ng/apps/#{singular_name.underscore.downcase}/views/main.html"
       end
 
       @ng_app_name = singular_name.underscore.camelize
