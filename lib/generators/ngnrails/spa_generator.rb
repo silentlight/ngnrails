@@ -38,11 +38,14 @@ module Ngnrails
         example_view = ""
       end
 
+      main_route_answer = ask("What is the main route for this SPA? (#{singular_name.dasherize.underscore}): ")
+
+      @main_route = main_route_answer.blank? ? singular_name.dasherize.underscore : main_route_answer
 
       insert_into_file "config/routes.rb", :after => "API::Application.routes.draw do\n" do
 "
   # SPA - Single page applications
-  get '#{singular_name.dasherize.underscore}' => 'spa/#{singular_name.underscore.downcase}#index', as: :#{singular_name.underscore.downcase}
+  get '#{@main_route}' => 'spa/#{singular_name.underscore.downcase}#index', as: :#{singular_name.underscore.downcase}
 "
       end
 
@@ -68,18 +71,12 @@ module Ngnrails
 
     end
 
-    def create_spa_index_view
-      text = File.read(File.expand_path("../templates", __FILE__) + '/app/views/spa/index_template.html.erb.tt')
-      text = text.gsub(/@@singular_name@@/, singular_name.underscore.downcase)
-      text = text.gsub(/@@class_name@@/, class_name)
-
-      create_file "app/views/spa/#{singular_name.underscore.downcase}/index.html.erb", text
-    end
-
     def create_rails_layout
 
       new_rails_layout_answer = ask("Do you want to create a separate Rails layout for this SPA? (y/N): ").downcase
       if !new_rails_layout_answer.blank? && new_rails_layout_answer == 'y'
+
+        @rails_layout_file = 'ng_example'
 
         text = File.read(File.expand_path("../templates", __FILE__) + '/app/views/layouts/template.html.erb.tt')
         text = text.gsub(/@@singular_name@@/, singular_name.underscore.downcase)
@@ -88,6 +85,18 @@ module Ngnrails
         create_file "app/views/layouts/#{singular_name}.html.erb", text
 
       end
+    end
+
+    def create_spa_index_view
+      text = File.read(File.expand_path("../templates", __FILE__) + '/app/views/spa/index_template.html.erb.tt')
+
+      @rails_layout_file = singular_name.underscore.downcase if @rails_layout_file.blank?
+
+      text = text.gsub(/@@layout_file@@/, @rails_layout_file)
+      text = text.gsub(/@@singular_name@@/, singular_name.underscore.downcase)
+      text = text.gsub(/@@class_name@@/, class_name)
+
+      create_file "app/views/spa/#{singular_name.underscore.downcase}/index.html.erb", text
     end
 
     def create_views_structure

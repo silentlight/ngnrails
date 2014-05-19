@@ -13,4 +13,4 @@
 <% content_for :footer do %>
     <%= javascript_include_tag 'ng/apps/@@singular_name@@/includes' %>
 <% end %>
-<%= render template: "layouts/@@singular_name@@" %>
+<%= render template: "layouts/@@layout_file@@" %>
