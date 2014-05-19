@@ -1,3 +1,84 @@
 = Ngnrails
 
-This project rocks and uses MIT-LICENSE.
+== What is Ngnrails?
+# Ngnrails is a gem for dev wizards who want to use AngularJS and Rails in their projects.
+
+== Why to bother with Ngnrails?
+# This little gem cares about your productivity. It's motto is: Less typing = more work done.
+# Ngnrails provides you with set of generators which let you create new Single Page Applications (SPA's), routes, directives, etc.
+# With just one command you can have your application up and running using amazing Rails and powerful AngularJS.
+
+== INSTALLATION
+# To install Ngnrails add to your Gemfile
+#   gem 'ngnrails', github: 'silentlight/ngnrails'
+# and run 'sudo bundle install' command
+#
+=== Bower
+# Ngnrails assumes that you are using Bower for assets dependency management. It means that instead of adding asset related files
+# like for instance AngularJS or jQuery libraries to Gemfile, you are adding them to bower.json. Why do we need that? If the new
+# version of our favorite library comes out, we don't need to wait until gem is updated to that version. With one simple command
+# 'bower install', you can download and use the newest libraries available.
+# You can find more info about Bower here http://bower.io/
+
+# IMPORTANT NOTE!
+# Ngnrails does not install Bower for you. Please use above link to install it on your machine manually.
+
+== USAGE
+# First thing after installing Ngnrails that you have to do is to run
+#   'rails g ngnrails:install'
+# This will generate all necessary files, update routes.rb, and install required and optional Bower packages
+#
+=== SPA
+# In order to creat a Single Page Application (SPA) you have to run
+#   rails g ngnrails:spa [spa_name]
+# After providing few key information, you will be able to run 'rake routes' to see that the main route to the SPA you
+# just created is there waiting for you. Use that url to view it in the browser.
+#
+# Once SPA is created you have number of generator you can use to create Angular resources for this particular SPA:
+# 1. rails g ngnrails:route [spa_name] - Adds route to SPA (to app.js file), creates Angular controller, creates view (static or dynamic)
+# 2. rails g ngnrails:directive [spa_name] - Adds directive files and creates static or dynamic template (if needed)
+# 3. rails g ngnrails:service [spa_name] - Adds service file
+# 4. rails g ngnrails:factory [spa_name] - Adds factory file
+# 5. rails g ngnrails:filter [spa_name] - Adds filter file
+# 6. rails g ngnrails:controller [spa_name] - Adds controller file
+# 7. rails g ngnrails:constant [spa_name] - Adds constant to app.js file
+# 8. rails g ngnrails:value [spa_name] - Adds value to app.js file
+#
+=== Modules
+# When there is a situation when you have more than one SPA's in your application (ie. one under "/admin" and one under "/partner")
+# what happens when you want to share Angular resources between them?
+# Here we introduce the concept of shared AngularJS modules which can be found under app/assets/javascripts/ng/modules directory.
+# Those modules can be used by and SPA which is located under app/assets/javascripts/ng/apps directory.
+# Here we have following generators available:
+# 1. rails g ngnrails:module:directive - Adds directive files and creates static or dynamic template (if needed)
+# 2. rails g ngnrails:module:service - Adds service file
+# 3. rails g ngnrails:module:factory - Adds factory file
+# 4. rails g ngnrails:module:filter - Adds filter file
+# 5. rails g ngnrails:module:controller - Adds controller file
+# 6. rails g ngnrails:module:constant - Adds constant to app.js file
+# 7. rails g ngnrails:module:value - Adds value to app.js file
+
+=== OPM (Other people's modules)
+# I recommend using Bower for including new modules to our SPA's.
+# In order to do that you can simply run 'bower install --save [package_name]'
+# All packages are downloaded to vendor/assets/bower_components direcotry
+# Once the package is downloaded you can add it:
+# 1. Globally - edit app/assets/javascripts/includes.js
+# 2. SPA specific edit app/assets/ng/apps/[name_of_the_app]/includes.js
+#
+# The other way is to download the module manually and place it under proper directory inside app/assets/javascripts/ng/modules direcotry.
+
+=== Refactoring modules
+# When you have a SPA-specific module (ie. directive), and you want it to be used in others SPA's as well, I provide you with conviniece
+# generators to refactor your module to shared modules.
+# In order to do that you can use below generators:
+# 1. rails g ngnrails:refactor:directive [spa_name] - Refactors directive from specific SPA
+# 2. rails g ngnrails:refactor:service [spa_name] - Refactors service from specific SPA
+# 3. rails g ngnrails:refactor:factory [spa_name] - Refactors factory from specific SPA
+# 4. rails g ngnrails:refactor:filter [spa_name] - Refactors filter from specific SPA
+# 5. rails g ngnrails:refactor:controller [spa_name] - Refactors controller from specific SPA
+# 6. rails g ngnrails:refactor:constant [spa_name] - Refactors constant from specific SPA
+# 7. rails g ngnrails:refactor:value [spa_name] - Refactors value from specific SPA
+
+
+

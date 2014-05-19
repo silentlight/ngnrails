@@ -43,43 +43,36 @@ module Ngnrails
 
     def setup_bower
 
-      use_bower_answer = ask("Do you want to use Bower for assets package management? (Y/n): ").downcase
+      # Create directory for Bower packages
+      empty_directory "vendor/assets/bower_components"
 
-      if use_bower_answer.downcase == 'y' || use_bower_answer.blank?
-
-        # Create directory for Bower packages
-        empty_directory "vendor/assets/bower_components"
-
-        # Add config options
-        insert_into_file "config/application.rb", :after => "class Application < Rails::Application\n" do
-          "    \n
-               # Used by Ngnrails with Bower integration\n
-               config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')\n
-          "
-        end
-
-        # Create .bowerrc file
-        copy_file ".bowerrc", ".bowerrc"
-
-        # Create bower.json file
-        @name = ask('What is the application name?: ')
-
-        version = ask('What is the application version? (0.0.0): ')
-        @version = version.blank? ? '0.0.0' : version
-
-        @description = ask('Who is the application description?: ')
-
-        license = ask('Who is the application license? (MIT): ')
-        @license = license.blank? ? 'MIT' : license
-
-        @homepage = ask('What is the main website of the application?: ')
-
-        @private = ask('Would you like to mark this package as private which prevents it from being accidentally published to the registry? (Y/N): ').downcase
-
-        template('bower_template.json.erb', 'bower.json')
-
+      # Add config options
+      insert_into_file "config/application.rb", :after => "class Application < Rails::Application\n" do
+        "    \n
+             # Used by Ngnrails with Bower integration\n
+             config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')\n
+        "
       end
 
+      # Create .bowerrc file
+      copy_file ".bowerrc", ".bowerrc"
+
+      # Create bower.json file
+      @name = ask('What is the application name?: ')
+
+      version = ask('What is the application version? (0.0.0): ')
+      @version = version.blank? ? '0.0.0' : version
+
+      @description = ask('Who is the application description?: ')
+
+      license = ask('Who is the application license? (MIT): ')
+      @license = license.blank? ? 'MIT' : license
+
+      @homepage = ask('What is the main website of the application?: ')
+
+      @private = ask('Would you like to mark this package as private which prevents it from being accidentally published to the registry? (Y/N): ').downcase
+
+      template('bower_template.json.erb', 'bower.json')
 
     end
 
